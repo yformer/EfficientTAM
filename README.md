@@ -1,5 +1,11 @@
-# EfficientTAM
-Efficient Track Anything
+# Efficient Track Anything
+[[`📕Project`](https://yformer.github.io/efficient-track-anything/)][[`🤗Gradio Demo`](https://55e434edafdc3f1c34.gradio.live)][[`📕Paper`](https://arxiv.org/pdf/2411.18933)]
+
+![Efficient Track Anything Speed](figs/examples/latency.png)
+
+The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight ViT image encoder. An efficient memory cross-attention is proposed to further improve the efficiency. Our EfficientTAMs are trained on SA-1B (image) and SA-V (video) datasets. EfficientTAM achieves comparable performance with SAM 2 with improved efficiency. Our EfficientTAM can run **>10 frames per second** with reasonable video segmentation performance on **iPhone 15**.
+
+![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
 [Dec.2 2024] We release the codebase of Efficient Track Anything.
