@@ -9,9 +9,9 @@ model:
     trunk:
       _target_: sam2.modeling.backbones.vitdet.ViT
       patch_size: 16
-      embed_dim: 192
+      embed_dim: 384
       depth: 12
-      num_heads: 3
+      num_heads: 6
       mlp_ratio: 4.0
       qkv_bias: true
       drop_path_rate: 0.0
@@ -27,7 +27,7 @@ model:
         scale: null
         temperature: 10000
       d_model: 256
-      backbone_channel_list: [192,]
+      backbone_channel_list: [384,]
       neck_norm: LN
 
   memory_attention:
@@ -52,7 +52,7 @@ model:
       pos_enc_at_cross_attn_keys: true
       pos_enc_at_cross_attn_queries: false
       cross_attention:
-        _target_: sam2.modeling.sam.transformer.RoPEAttention
+        _target_: sam2.modeling.sam.transformer.EfficientRoPEAttention1
         rope_theta: 10000.0
         feat_sizes: [32, 32]
         rope_k_repeat: True
@@ -89,7 +89,7 @@ model:
         num_layers: 2
 
   num_maskmem: 7
-  image_size: 512
+  image_size: 1024
   # apply scaled sigmoid on mask logits for memory encoder, and directly feed input mask as output mask
   # SAM decoder
   sigmoid_scale_for_mem_enc: 20.0
@@ -119,4 +119,5 @@ model:
   multimask_max_pt_num: 1
   use_mlp_for_obj_ptr_proj: true
   # Compilation flag
-  compile_image_encoder: true
+  # HieraT does not currently support compilation, should always be set to False
+  compile_image_encoder: false

@@ -7,10 +7,10 @@
 from collections import OrderedDict
 
 import torch
-from tqdm import tqdm
 
 from sam2.modeling.sam2_base import NO_OBJ_SCORE, SAM2Base
 from sam2.utils.misc import concat_points, fill_holes_in_mask_scores, load_video_frames
+from tqdm import tqdm
 
 
 class SAM2VideoPredictor(SAM2Base):
@@ -684,6 +684,8 @@ class SAM2VideoPredictor(SAM2Base):
     @torch.inference_mode()
     def reset_state(self, inference_state):
         """Remove all input points or mask in all frames throughout the video."""
+        if inference_state is None:
+            return
         self._reset_tracking_results(inference_state)
         # Remove all object ids
         inference_state["obj_id_to_idx"].clear()
@@ -696,8 +698,6 @@ class SAM2VideoPredictor(SAM2Base):
 
     def _reset_tracking_results(self, inference_state):
         """Reset all tracking inputs and results across the videos."""
-        if inference_state is None:
-            return
         for v in inference_state["point_inputs_per_obj"].values():
             v.clear()
         for v in inference_state["mask_inputs_per_obj"].values():
