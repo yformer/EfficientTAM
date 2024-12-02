@@ -20,7 +20,7 @@ SAM 2 | ![SAM2](figs/examples/sam2_video_segmentation.png)
 EfficientTAM |  ![EfficientTAM](figs/examples/efficienttam_video_segmentation.png)
 
 ## EfficientTAM Image Segmentation Examples
-  |  SAM |  EficientSAM | SAM 2 | EfficientTAM
+Input Image  |  SAM |  EficientSAM | SAM 2 | EfficientTAM |
 :-------------------------:|:-------------------------:
 Point-prompt | ![point-prompt](figs/examples/demo_img_point.png)
 Box-prompt |  ![box-prompt](figs/examples/demo_img_box.png)
