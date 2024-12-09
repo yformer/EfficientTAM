@@ -1,5 +1,5 @@
 # Efficient Track Anything
-[[`📕Project`](https://yformer.github.io/efficient-track-anything/)][[`🤗Gradio Demo`](https://55e434edafdc3f1c34.gradio.live)][[`📕Paper`](https://arxiv.org/pdf/2411.18933)]
+[[`📕Project`](https://yformer.github.io/efficient-track-anything/)][[`🤗Gradio Demo`](https://2ab5e2198a0dcbe8a2.gradio.live)][[`📕Paper`](https://arxiv.org/pdf/2411.18933)]
 
 ![Efficient Track Anything Speed](figs/examples/speed_vs_latency.png)
 
