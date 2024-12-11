@@ -8,7 +8,7 @@ The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
-[Dec.4 2024] [`🤗Efficient Track Anything for segment everything`](https://5239f8e221db7ee8a0.gradio.live/). Thanks to @SkalskiP!
+[Dec.4 2024] [`🤗Efficient Track Anything for segment everything`](https://2ab5e2198a0dcbe8a2.gradio.live). Thanks to @SkalskiP!
 
 [Dec.2 2024] We release the codebase of Efficient Track Anything.
 
