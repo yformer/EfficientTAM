@@ -1,5 +1,5 @@
 # Efficient Track Anything
-[[`📕Project`](https://yformer.github.io/efficient-track-anything/)][[`🤗Gradio Demo`](https://bea2c478296e25b3ce.gradio.live)][[`📕Paper`](https://arxiv.org/pdf/2411.18933)]
+[[`📕Project`](https://yformer.github.io/efficient-track-anything/)][[`🤗Gradio Demo`](https://bea2c478296e25b3ce.gradio.live)][[`📕Paper`](https://arxiv.org/pdf/2411.18933)][[`🤗Checkpoints`]](https://huggingface.co/yunyangx/efficient-track-anything/tree/main)
 
 ![Efficient Track Anything Speed](figs/examples/speed_vs_latency.png)
 
@@ -8,6 +8,8 @@ The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
+[Dec.22 2024] We release [`🤗Efficient Track Anything Checkpoints`](https://huggingface.co/spaces/yunyangx/EfficientTAM/tree/main).
+
 [Dec.4 2024] [`🤗Efficient Track Anything for segment everything`](https://5239f8e221db7ee8a0.gradio.live/). Thanks to @SkalskiP!
 
 [Dec.2 2024] We release the codebase of Efficient Track Anything.
@@ -30,7 +32,10 @@ Box-prompt |  ![box-prompt](figs/examples/demo_img_box.png)
 Segment everything |![segment everything](figs/examples/demo_img_everything.png)
 
 ## Model
-EfficientTAM checkpoints will be available soon on the [Hugging Face Space](https://huggingface.co/spaces/yunyangx/EfficientTAM/tree/main).
+EfficientTAM checkpoints are available at the [Hugging Face Space](https://huggingface.co/yunyangx/efficient-track-anything/tree/main).
+
+## License
+Efficient track anything checkpoints and codebase are licensed under [Apache 2.0](./LICENSE).
 
 ## Acknowledgement
 
