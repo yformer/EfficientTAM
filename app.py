@@ -469,14 +469,13 @@ with gr.Blocks() as demo:
     available_frames_to_check = gr.State([])
     with gr.Column():
         # Title
-        # gr.Markdown(title)
+        gr.Markdown(title)
         with gr.Row():
             
             with gr.Column():
                 # Instructions
                 gr.Markdown(description_p)
 
-                # video_exp = gr.Video(label="Input Example", format="mp4", visible=False)
                 with gr.Accordion("Input Video", open=True) as video_in_drawer:
                     video_in = gr.Video(label="Input Video", format="mp4")
                 
