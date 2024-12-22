@@ -8,7 +8,7 @@ The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
-[Dec.22 2024] We release [`🤗Efficient Track Anything Checkpoints`](https://huggingface.co/spaces/yunyangx/EfficientTAM/tree/main).
+[Dec.22 2024] We release [`🤗Efficient Track Anything Checkpoints`](https://huggingface.co/yunyangx/efficient-track-anything/tree/main).
 
 [Dec.4 2024] [`🤗Efficient Track Anything for segment everything`](https://5239f8e221db7ee8a0.gradio.live/). Thanks to @SkalskiP!
 
