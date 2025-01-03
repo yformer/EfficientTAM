@@ -6,7 +6,7 @@ The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
-[Jan.3 2025] We update the codebase of Efficient Track Anything, adpated from the latest [SAM2](https://github.com/facebookresearch/sam2) codebase on [Dec. 11 2024] with improved inference efficiency. Thanks to SAM 2 team!
+[Jan.3 2025] We update the codebase of Efficient Track Anything, adpated from the latest [SAM2](https://github.com/facebookresearch/sam2) codebase with improved inference efficiency. Thanks to SAM 2 team!
 
 [Dec.22 2024] We release [`🤗Efficient Track Anything Checkpoints`](https://huggingface.co/yunyangx/efficient-track-anything/tree/main).
 
