@@ -11,7 +11,7 @@ import os
 from setuptools import find_packages, setup
 
 # Package metadata
-NAME = "efficient-track-anything"
+NAME = "efficient_track_anything"
 VERSION = "1.0"
 DESCRIPTION = "Efficient Track Anything"
 URL = "https://yformer.github.io/efficient-track-anything/"
@@ -25,13 +25,24 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 # Required dependencies
 REQUIRED_PACKAGES = [
-    "torch>=2.3.1",
-    "torchvision>=0.18.1",
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
     "numpy>=1.24.4",
     "tqdm>=4.66.1",
     "hydra-core>=1.3.2",
     "iopath>=0.1.10",
     "pillow>=9.4.0",
+    "huggingface-hub==0.26.2",
+    "iopath>=0.1.10",
+    "pillow>=9.4.0",
+    "gradio==4.44.0",
+    "gradio_client==1.3.0",
+    "gradio_image_prompter==0.1.0",
+    "imageio==2.9.0",
+    "imageio-ffmpeg==0.5.1",
+    "opencv-python>=4.7.0",
+    "moviepy==1.0.3",
+    "supervision==0.25.0",
 ]
 
 EXTRA_PACKAGES = {
@@ -61,28 +72,28 @@ EXTRA_PACKAGES = {
         "scikit-image>=0.24.0",
         "tensorboard>=2.17.0",
         "pycocotools>=2.0.8",
-        "tensordict>=0.5.0",
+        "tensordict>=0.6.0",
         "opencv-python>=4.7.0",
         "submitit>=1.5.1",
     ],
 }
 
-# By default, we also build the SAM 2 CUDA extension.
-# You may turn off CUDA build with `export SAM2_BUILD_CUDA=0`.
-BUILD_CUDA = os.getenv("SAM2_BUILD_CUDA", "1") == "1"
-# By default, we allow SAM 2 installation to proceed even with build errors.
-# You may force stopping on errors with `export SAM2_BUILD_ALLOW_ERRORS=0`.
-BUILD_ALLOW_ERRORS = os.getenv("SAM2_BUILD_ALLOW_ERRORS", "1") == "1"
+# Following SAM2, we also build the Efficient Track Anything CUDA extension.
+# You may turn off CUDA build with `export Efficient_Track_Anything_BUILD_CUDA=0`.
+BUILD_CUDA = os.getenv("Efficient_Track_Anything_BUILD_CUDA", "1") == "1"
+# Following SAM2, we allow efficient track anything installation to proceed even with build errors.
+# You may force stopping on errors with `export Efficient_Track_Anything_BUILD_ALLOW_ERRORS=0`.
+BUILD_ALLOW_ERRORS = (
+    os.getenv("Efficient_Track_Anything_BUILD_ALLOW_ERRORS", "1") == "1"
+)
 
-# Catch and skip errors during extension building and print a warning message
+# Following SAM2, we also catch and skip errors during extension building and print a warning message
 # (note that this message only shows up under verbose build mode
 # "pip install -v -e ." or "python setup.py build_ext -v")
 CUDA_ERROR_MSG = (
     "{}\n\n"
-    "Failed to build the SAM 2 CUDA extension due to the error above. "
-    "You can still use SAM 2 and it's OK to ignore the error above, although some "
-    "post-processing functionality may be limited (which doesn't affect the results in most cases; "
-    "(see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).\n"
+    "Failed to build the Efficient Track Anything CUDA extension due to the error above. "
+    "You can still use Efficient Track Anything and it's OK to ignore the error above.\n"
 )
 
 
@@ -93,7 +104,7 @@ def get_extensions():
     try:
         from torch.utils.cpp_extension import CUDAExtension
 
-        srcs = ["sam2/csrc/connected_components.cu"]
+        srcs = ["efficient_track_anything/csrc/connected_components.cu"]
         compile_args = {
             "cxx": [],
             "nvcc": [
@@ -103,7 +114,11 @@ def get_extensions():
                 "-D__CUDA_NO_HALF2_OPERATORS__",
             ],
         }
-        ext_modules = [CUDAExtension("sam2._C", srcs, extra_compile_args=compile_args)]
+        ext_modules = [
+            CUDAExtension(
+                "efficient_track_anything._C", srcs, extra_compile_args=compile_args
+            )
+        ]
     except Exception as e:
         if BUILD_ALLOW_ERRORS:
             print(CUDA_ERROR_MSG.format(e))

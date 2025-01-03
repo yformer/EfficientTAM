@@ -1,18 +1,18 @@
 # Efficient Track Anything
 [[`📕Project`](https://yformer.github.io/efficient-track-anything/)][[`🤗Gradio Demo`](https://10f00f01361a8328a4.gradio.live)][[`📕Paper`](https://arxiv.org/pdf/2411.18933)][[`🤗Checkpoints`]](https://huggingface.co/yunyangx/efficient-track-anything/tree/main)
 
-![Efficient Track Anything Speed](figs/examples/speed_vs_latency.png)
-
 The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight ViT image encoder. An efficient memory cross-attention is proposed to further improve the efficiency. Our EfficientTAMs are trained on SA-1B (image) and SA-V (video) datasets. EfficientTAM achieves comparable performance with SAM 2 with improved efficiency. Our EfficientTAM can run **>10 frames per second** with reasonable video segmentation performance on **iPhone 15**. Try our demo with a family of EfficientTAMs at [[`🤗Gradio Demo`](https://10f00f01361a8328a4.gradio.live)].
 
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
+[Jan.3 2025] We update the codebase of Efficient Track Anything, adpated from the latest [SAM2](https://github.com/facebookresearch/sam2) codebase on [Dec. 11 2024] with improved inference efficiency. Thanks to SAM 2 team!
+
 [Dec.22 2024] We release [`🤗Efficient Track Anything Checkpoints`](https://huggingface.co/yunyangx/efficient-track-anything/tree/main).
 
 [Dec.4 2024] [`🤗Efficient Track Anything for segment everything`](https://5239f8e221db7ee8a0.gradio.live/). Thanks to @SkalskiP!
 
-[Dec.2 2024] We release the codebase of Efficient Track Anything.
+[Dec.2 2024] We provide the initial version of Efficient Track Anything for demonstration.
 
 ## Online Demo & Examples
 Online demo and examples can be found in the [project page](https://yformer.github.io/efficient-track-anything/).
@@ -33,6 +33,62 @@ Segment everything |![segment everything](figs/examples/demo_img_everything.png)
 
 ## Model
 EfficientTAM checkpoints are available at the [Hugging Face Space](https://huggingface.co/yunyangx/efficient-track-anything/tree/main).
+
+## Getting Started
+
+### Installation
+
+```bash
+git clone https://github.com/yformer/EfficientTAM.git
+cd EfficientTAM
+conda create -n efficient_track_anything python=3.12
+conda activate efficient_track_anything
+pip install -e .
+```
+### Download Checkpoints
+
+```bash
+cd checkpoints
+./download_checkpoints.sh
+```
+
+We can benchmark FPS of efficient track anything models on GPUs.
+
+### FPS benchmarking
+
+```bash
+cd ..
+python efficient_track_anything/benchmark.py
+```
+
+### Launching Gradio Demo Locally
+For efficient track anything video, run
+```
+python app.py
+```
+For efficient track anything image, run
+```
+python app_image.py
+```
+
+
+### Building Efficient Track Anything
+You can build efficient track anything model with a config and initial the model with a checkpoint,
+```python
+import torch
+
+from efficient_track_anything.build_efficienttam import (
+    build_efficienttam_video_predictor,
+)
+
+checkpoint = "./checkpoints/efficienttam_s.pt"
+model_cfg = "configs/efficienttam/efficienttam_s.yaml"
+
+predictor = build_efficienttam_video_predictor(model_cfg, checkpoint)
+```
+
+### Efficient Track Anything Notebook Example
+The notebook is shared [here](https://github.com/yformer/EfficientTAM/blob/main/notebooks)
 
 ## License
 Efficient track anything checkpoints and codebase are licensed under [Apache 2.0](./LICENSE).
