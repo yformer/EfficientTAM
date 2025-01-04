@@ -28,7 +28,7 @@ description_p = """# Efficient Track Anything
                 - Built our demo based on [SAM2-Video-Predictor](https://huggingface.co/spaces/fffiloni/SAM2-Video-Predictor). Thanks to Sylvain Filoni.
                 - Instruction
                 <ol>
-                <li> Download [`🤗Efficient Track Anything Checkpoints`](https://huggingface.co/yunyangx/efficient-track-anything/tree/main) </li>
+                <li> Download <a href="https://huggingface.co/yunyangx/efficient-track-anything/tree/main">🤗Efficient Track Anything Checkpoints</a></li>
                 <li> Upload one video or click one example video</li>
                 <li> Click 'include' point type, select the object to segment and track</li>
                 <li> Click 'exclude' point type (optional), select the area you want to avoid segmenting and tracking</li>
