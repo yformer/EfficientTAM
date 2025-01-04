@@ -43,6 +43,8 @@ predictor = build_efficienttam_video_predictor(
     model_cfg, efficienttam_checkpoint, device=device, vos_optimized=True
 )
 
+model_total_params = sum(p.numel() for p in predictor.parameters())
+print("Model Size: ", model_total_params)
 
 # Initialize with video
 video_dir = "notebooks/videos/bedroom"
