@@ -215,15 +215,16 @@ def get_point(
 
     return tracking_points, trackings_input_label, selected_point_map
 
-
-DEVICE = "cuda"
-# use bfloat16 for the entire notebook
-torch.autocast(device_type="cuda", dtype=torch.bfloat16).__enter__()
-if torch.cuda.get_device_properties(0).major >= 8:
-    # turn on tfloat32 for Ampere GPUs (https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices)
-    torch.backends.cuda.matmul.allow_tf32 = True
-    torch.backends.cudnn.allow_tf32 = True
-
+if torch.cuda.is_available():
+    DEVICE = "cuda"
+    # use bfloat16 for the entire notebook
+    torch.autocast(device_type="cuda", dtype=torch.bfloat16).__enter__()
+    if torch.cuda.get_device_properties(0).major >= 8:
+        # turn on tfloat32 for Ampere GPUs (https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices)
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+elif torch.mps.is_available():
+    DEVICE = "mps"
 
 def show_mask(mask, ax, obj_id=None, random_color=False):
     if random_color:
@@ -337,7 +338,7 @@ def get_mask_efficienttam_process(
 
     # set predictor
     predictor = build_efficienttam_video_predictor(
-        model_cfg, efficienttam_checkpoint, device="cuda"
+        model_cfg, efficienttam_checkpoint, device=DEVICE
     )
     print("PREDICTOR READY")
 
@@ -450,7 +451,7 @@ def propagate_to_all(
     #### PROPAGATION ####
     efficienttam_checkpoint, model_cfg = load_model(checkpoint)
     predictor = build_efficienttam_video_predictor(
-        model_cfg, efficienttam_checkpoint, device="cuda"
+        model_cfg, efficienttam_checkpoint, device=DEVICE
     )
 
     inference_state = stored_inference_state

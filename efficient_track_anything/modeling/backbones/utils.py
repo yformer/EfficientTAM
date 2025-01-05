@@ -113,10 +113,14 @@ def get_abs_pos(abs_pos, has_cls_token, hw):
     assert size * size == xy_num
 
     if size != h or size != w:
+        interpolate_mode = "bicubic"
+        if not torch.cuda.is_available() and torch.mps.is_available():
+            # bicubic is not supported on torch mps
+            interpolate_mode = "bilinear"
         new_abs_pos = F.interpolate(
             abs_pos.reshape(1, size, size, -1).permute(0, 3, 1, 2),
             size=(h, w),
-            mode="bicubic",
+            mode=interpolate_mode,
             align_corners=False,
         )
         return new_abs_pos.permute(0, 2, 3, 1)

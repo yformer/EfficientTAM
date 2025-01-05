@@ -17,15 +17,17 @@ from efficient_track_anything.build_efficienttam import (
 )
 from tqdm import tqdm
 
-# Only cuda supported
-assert torch.cuda.is_available()
-device = torch.device("cuda")
-
-torch.autocast(device_type="cuda", dtype=torch.bfloat16).__enter__()
-if torch.cuda.get_device_properties(0).major >= 8:
-    # turn on tfloat32 for Ampere GPUs (https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices)
-    torch.backends.cuda.matmul.allow_tf32 = True
-    torch.backends.cudnn.allow_tf32 = True
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    torch.autocast(device_type="cuda", dtype=torch.bfloat16).__enter__()
+    if torch.cuda.get_device_properties(0).major >= 8:
+        # turn on tfloat32 for Ampere GPUs (https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices)
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+elif torch.mps.is_available():
+    device = torch.device("mps")
+else:
+    raise RuntimeError("No CUDA or MPS device found")
 
 # Config and checkpoint
 # model_cfg = "configs/efficienttam/efficienttam_s.yaml"
@@ -82,24 +84,23 @@ _, out_obj_ids, out_mask_logits = predictor.add_new_points_or_box(
 )
 
 # Warmup and then average FPS over several runs
-with torch.autocast("cuda", torch.bfloat16):
-    with torch.inference_mode():
-        for i in tqdm(range(runs), disable=not verbose, desc="Benchmarking"):
-            start = time.time()
-            # Start tracking
-            for (
-                out_frame_idx,
-                out_obj_ids,
-                out_mask_logits,
-            ) in predictor.propagate_in_video(inference_state):
-                pass
+with torch.inference_mode():
+    for i in tqdm(range(runs), disable=not verbose, desc="Benchmarking"):
+        start = time.time()
+        # Start tracking
+        for (
+            out_frame_idx,
+            out_obj_ids,
+            out_mask_logits,
+        ) in predictor.propagate_in_video(inference_state):
+            pass
 
-            end = time.time()
-            total += end - start
-            count += 1
-            if i == warm_up - 1:
-                print("Warmup FPS: ", count * num_frames / total)
-                total = 0
-                count = 0
+        end = time.time()
+        total += end - start
+        count += 1
+        if i == warm_up - 1:
+            print("Warmup FPS: ", count * num_frames / total)
+            total = 0
+            count = 0
 
 print("FPS: ", count * num_frames / total)
