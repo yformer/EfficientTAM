@@ -215,6 +215,7 @@ def get_point(
 
     return tracking_points, trackings_input_label, selected_point_map
 
+
 if torch.cuda.is_available():
     DEVICE = "cuda"
     # use bfloat16 for the entire notebook
@@ -225,6 +226,7 @@ if torch.cuda.is_available():
         torch.backends.cudnn.allow_tf32 = True
 elif torch.mps.is_available():
     DEVICE = "mps"
+
 
 def show_mask(mask, ax, obj_id=None, random_color=False):
     if random_color:
@@ -305,8 +307,8 @@ def load_model(checkpoint):
         model_cfg = "configs/efficienttam/efficienttam_ti_2.yaml"
         return [efficienttam_checkpoint, model_cfg]
     else:
-        efficienttam_checkpoint = "./checkpoints/efficienttam_s.pt"
-        model_cfg = "configs/efficienttam/efficienttam_s.yaml"
+        efficienttam_checkpoint = "./checkpoints/efficienttam_s_512x512.pt"
+        model_cfg = "configs/efficienttam/efficienttam_s_512x512.yaml"
         return [efficienttam_checkpoint, model_cfg]
 
 
@@ -640,7 +642,7 @@ with gr.Blocks() as demo:
                             "efficienttam_ti_1",
                             "efficienttam_ti_2",
                         ],
-                        value="efficienttam_s",
+                        value="efficienttam_s_512x512",
                     )
                     submit_btn = gr.Button("Segment", size="lg")
 
