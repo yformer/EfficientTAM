@@ -1,0 +1,6 @@
+output_video.mp4
+output_first_frame.jpg
+frames_*
+*.egg-info
+__pycache__/
+checkpoints/*.pt
