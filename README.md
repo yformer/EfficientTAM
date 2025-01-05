@@ -6,6 +6,8 @@ The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
+[Jan.5 2025] We add the support for running EfficientTAM on Macs with MPS backend.
+
 [Jan.3 2025] We update the codebase of Efficient Track Anything, adpated from the latest [SAM2](https://github.com/facebookresearch/sam2) codebase with improved inference efficiency. Check the latest [SAM2](https://github.com/facebookresearch/sam2) update on Dec. 11 2024 for details. Thanks to SAM 2 team!
 
 ![Efficient Track Anything Speed Update](figs/examples/speed_vs_latency_update.png)
