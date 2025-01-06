@@ -6,7 +6,7 @@ The **Efficient Track Anything Model(EfficientTAM)** takes a vanilla lightweight
 ![Efficient Track Anything design](figs/examples/overview.png)
 
 ## News
-[Jan.5 2025] We add the support for running Efficient Track Anything on Macs with MPS backend.
+[Jan.5 2025] We add the support for running Efficient Track Anything on Macs with MPS backend. Check the example [app.py](https://github.com/yformer/EfficientTAM/blob/main/app.py).
 
 [Jan.3 2025] We update the codebase of Efficient Track Anything, adpated from the latest [SAM2](https://github.com/facebookresearch/sam2) codebase with improved inference efficiency. Check the latest [SAM2](https://github.com/facebookresearch/sam2) update on Dec. 11 2024 for details. Thanks to SAM 2 team!
 
